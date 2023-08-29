@@ -1,0 +1,10 @@
+let content = document.querySelector(".content");
+let nav = document.createElement("div");
+let home = document.createElement("div");
+home.innerText = "Home";
+let menu = document.createElement("div");
+menu.innerText = "Menu";
+let contact = document.createElement("contact");
+contact.innerText = "Contact";
+nav.append(home, menu, contact);
+content.append(nav);
