@@ -1,31 +1,31 @@
+import navbar from "./navigation/navbar";
+import home from "./pages/home";
+import menu from "./pages/menu";
+import contact from "./pages/contact";
 import "./style.css";
 
 function navHandler(e) {
+  let pages = [home, menu, contact];
   let tab = document.getElementById(e.target.id);
   tab.parentElement.childNodes.forEach((element) => {
     element.classList.remove("nav-selected");
   });
   tab.classList.add("nav-selected");
-
-  //render home, menu or contact contents
+  let body = document.querySelector(".body");
+  body.innerHTML = "";
+  pages[e.target.id.split("-")[1]]();
+}
+function addNavListener() {
+  let navbar = document.querySelector(".nav");
+  navbar.childNodes.forEach((e) => {
+    e.addEventListener("click", navHandler);
+  });
 }
 
-// move to function
-let content = document.querySelector(".content");
-let nav = document.createElement("div");
-nav.classList.add("nav");
-let home = document.createElement("div");
-home.innerText = "Home";
-home.id = "nav-0";
-home.classList.add("nav-selected");
-home.addEventListener("click", navHandler);
-let menu = document.createElement("div");
-menu.innerText = "Menu";
-menu.id = "nav-1";
-menu.addEventListener("click", navHandler);
-let contact = document.createElement("div");
-contact.innerText = "Contact";
-contact.id = "nav-2";
-contact.addEventListener("click", navHandler);
-nav.append(home, menu, contact);
-content.append(nav);
+function init() {
+  navbar();
+  addNavListener();
+  home();
+}
+
+init();
